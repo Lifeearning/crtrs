@@ -1,0 +1,34 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名和下划线命名的自动转换
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/# 你的数据库表名?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: # 你的数据库密码
+#  文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 2MB # 单个文件最大2MB
+      max-request-size: 10MB # 单次请求最大10MB
+
+# 图片上传配置
+file:
+  upload:
+    # 腾讯云宝塔CRTRS文件夹物理绝对路径，和你刚才创建的完全对应
+    dir:
+    # 图片访问前缀，用你的腾讯云服务器公网IP
+    access-prefix:
+# FTP配置（腾讯云宝塔刚创建的账号信息）
+ftp:
+  host:   # 你的腾讯云服务器公网IP，固定填这个
+  port: 21               # FTP默认端口，不用改
+  username:   # 比如crtrs_upload
+  password:   # 对应创建FTP时设置的密码
+  basePath: /            # 固定写/，因为FTP根目录已经指向CRTRS文件夹
