@@ -165,7 +165,7 @@ const loading = ref(true)
 const error = ref(false)
 const bookDetail = ref({})
 
-// 修复：判断是否是自己的商品
+// 判断是否是自己的商品
 const isSelfBook = computed(() => {
   if (!currentUserUcount.value || !bookDetail.value?.ucount) return false
   return currentUserUcount.value === bookDetail.value.ucount

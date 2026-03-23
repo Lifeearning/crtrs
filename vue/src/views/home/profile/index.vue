@@ -49,7 +49,6 @@
           <div class="card-header">
             <h3>
               订单消息预览
-              <!-- 优化：用Tag组件美化“仅显示最新5条数据” -->
               <el-tag size="small" type="info" effect="light" class="tips-tag">
                 <el-icon size="12"><Clock /></el-icon>
                 仅显示最新5条数据
@@ -115,7 +114,6 @@
           <div class="card-header">
             <h3>
               收益统计
-              <!-- 优化：用Tag组件美化“近5月” -->
               <el-tag size="small" type="primary" effect="light" class="tips-tag">
                 <el-icon size="12"><Calendar /></el-icon>
                 近5月
@@ -153,14 +151,13 @@ import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import { 
   User, ShoppingCart, Shop, ArrowRight, 
-  Histogram, TrendCharts, Clock, Calendar // 新增Clock和Calendar图标
+  Histogram, TrendCharts, Clock, Calendar
 } from '@element-plus/icons-vue'
-// 引入接口服务
 import service from '@/api'
-// 路由实例
+
 const router = useRouter()
 
-// ========== 1. 用户基础信息数据 ==========
+// 用户基础信息数据
 const userInfo = reactive({
   avatarUrl: localStorage.getItem('avatar'),
   nickname: localStorage.getItem('ucount'),
@@ -184,7 +181,7 @@ const getUserInfo = async () => {
   }
 }
 
-// ========== 2. 订单预览数据 ==========
+// 订单预览数据
 const activeOrderTab = ref('buy')
 const buyOrderPreview = ref([])
 const sellOrderPreview = ref([])
@@ -254,7 +251,7 @@ const fetchOrderPreview = async () => {
   }
 }
 
-// ========== 3. ECharts 收益图表相关 ==========
+// ECharts 收益图表相关
 const profitChartRef = ref(null)
 let profitChart = null
 const chartType = ref('bar')
@@ -374,7 +371,7 @@ const switchChartType = (type) => {
   initProfitChart()
 }
 
-// ========== 4. 事件处理函数 ==========
+// 事件处理函数
 const goToEditInfo = () => {
   router.push('/edit')
 }
@@ -383,7 +380,7 @@ const goToOrders = () => {
   router.push('/orders')
 }
 
-// ========== 5. 生命周期钩子 ==========
+// 生命周期钩子
 onMounted(async () => {
   await fetchProfitData()
   initProfitChart()

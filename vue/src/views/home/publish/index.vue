@@ -102,7 +102,7 @@
             prefix="¥"
           />
         </el-form-item>
-        <!-- 书籍图片（可选）- 仅修改这部分配置 -->
+        <!-- 书籍图片（可选） -->
         <el-form-item label="书籍图片">
           <el-upload
             class="image-uploader"
@@ -147,9 +147,9 @@
 import { ref, reactive } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import service from '@/api'
-import { ElMessage } from 'element-plus'  // 新增：引入提示组件（和你原有风格一致）
+import { ElMessage } from 'element-plus'
 
-// 专业参考列表（与首页保持一致）- 完全保留
+// 专业参考列表（与首页保持一致）
 const majorReferenceList = ref([
   { label: '计算机科学与技术', value: '计算机科学与技术' },
   { label: '软件工程', value: '软件工程' },
@@ -157,7 +157,7 @@ const majorReferenceList = ref([
   { label: '自动化', value: '自动化' },
   { label: '数据科学与大数据技术', value: '数据科学与大数据技术' }
 ])
-// 课程参考列表（与首页保持一致）- 完全保留
+// 课程参考列表（与首页保持一致）
 const courseReferenceList = ref([
   { label: '数据结构与算法', value: '数据结构与算法' },
   { label: '操作系统', value: '操作系统' },
@@ -165,14 +165,14 @@ const courseReferenceList = ref([
   { label: '编程语言（Python/Java/JS）', value: '编程语言（Python/Java/JS）' },
   { label: '机器学习', value: '机器学习' }
 ])
-// 表单引用 - 完全保留
+// 表单引用 
 const publishFormRef = ref(null)
-// 图片上传文件列表 - 完全保留
+// 图片上传文件列表 
 const imageFileList = ref([])
-// 新增：存储用户选中的原始图片文件对象（提交时用）
+// 存储用户选中的原始图片文件对象（提交时用）
 const uploadFile = ref(null)
 
-// 发布表单数据 - 完全保留（移除了原有的imageUrl，因为提交时才生成）
+// 发布表单数据
 const publishForm = reactive({
   uid: localStorage.getItem('uid'), // 用户ID
   title: '',        // 书籍名称（必选）
@@ -185,7 +185,7 @@ const publishForm = reactive({
   desc: ''          // 书籍摘要（可选）
 })
 
-// 表单验证规则 - 完全保留（一字未改）
+// 表单验证规则 
 const publishRules = reactive({
   title: [
     { required: true, message: '请输入书籍名称', trigger: 'blur' },
@@ -252,7 +252,7 @@ const beforeUpload = (file) => {
 const handleImageChange = (uploadFileObj, fileList) => {
   imageFileList.value = fileList
   uploadFile.value = uploadFileObj.raw // 保存原始图片文件对象
-  // 保留本地预览效果（和你原有逻辑一致）
+  // 保留本地预览效果
   if (fileList.length > 0 && fileList[0].raw) {
     fileList[0].url = URL.createObjectURL(fileList[0].raw)
   }
@@ -269,10 +269,10 @@ const handleSubmit = async () => {
   if (!publishFormRef.value) return
   
   try {
-    // 原有逻辑：表单验证
+    // 表单验证
     await publishFormRef.value.validate()
     
-    // 新增：图片非空校验（可选，根据你的需求决定是否必填）
+    // 图片非空校验
     if (!uploadFile.value) {
       ElMessage.warning('请先选择书籍图片！');
       return;
@@ -280,7 +280,7 @@ const handleSubmit = async () => {
 
     const isConfirm = confirm('确认发布该书籍信息吗？发布后将展示在商品列表中');
     if (isConfirm) {
-      // 新增：创建FormData，封装图片文件+表单数据
+      // 创建FormData，封装图片文件+表单数据
       const formData = new FormData()
       formData.append('file', uploadFile.value) // 图片文件（后端参数名：file）
       // 遍历表单数据，全部追加到FormData
@@ -313,13 +313,13 @@ const handleReset = () => {
   if (publishFormRef.value) {
     publishFormRef.value.resetFields();
     imageFileList.value = [];
-    uploadFile.value = null; // 新增：清空图片文件对象
+    uploadFile.value = null; // 清空图片文件对象
     publishForm.desc = '';
   }
 }
 </script>
 <style scoped>
-/* 原有样式 - 完全保留，一字未改 */
+/* 原有样式 ， */
 .publish-book-page {
   max-width: 1200px;
   margin: 0 auto;

@@ -110,7 +110,7 @@ function showToast(msg, type = 'success') {
   }, 2600)
 }
 
-// 🔥 修复后的完整校验规则
+// 校验规则
 const registerRules = reactive({
   phone: [
     {

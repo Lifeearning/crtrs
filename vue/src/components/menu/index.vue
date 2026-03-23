@@ -215,7 +215,7 @@ const handleLogout = () => {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* 滚动条样式优化（Windows风格） */
+/* 滚动条样式优化 */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

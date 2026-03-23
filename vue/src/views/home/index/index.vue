@@ -240,18 +240,16 @@ const displayBannerList = computed(() => {
 const fetchBookList = async () => {
   try {
     const response = await service.get("/index/getAll")
-    console.log('✅ 后端返回的书籍数据：', response)
     if (Array.isArray(response)) {
       bookList.value = response
-      console.log('✅ 第一个书籍的图片路径：', bookList.value[0]?.bimageUrl)
     } else {
       console.error('❌ 后端返回数据不是数组：', response)
       bookList.value = []
     }
     filteredBookList.value = [...bookList.value]
-    console.log('✅ 筛选列表更新后长度：', filteredBookList.value.length)
   } catch (error) {
-    console.error('❌ 获取书籍列表失败：', error)
+    bookList.value = []
+    filteredBookList.value = []
   }
 }
 onMounted(() => {
@@ -303,7 +301,7 @@ const resetFilter = () => {
   filteredBookList.value = [...bookList.value]
 }
 
-// 美化版原生提示框
+// 提示框
 const showCustomAlert = () => {
   // 遮罩层
   const overlay = document.createElement('div')
@@ -490,7 +488,7 @@ const goToDetail = (bid) => {
   margin-top: 15px;
   font-size: 16px;
 }
-/* 修复核心：卡片样式优化 */
+
 .book-card {
   border-radius: 8px;
   overflow: hidden;
